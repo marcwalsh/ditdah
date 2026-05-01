@@ -10,12 +10,20 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+  <div class="play-bar">
+    <button id="btn-play" class="play-button" type="button" aria-label="Play the daily word in Morse" disabled>
+      <span class="play-icon" aria-hidden="true">▶</span>
+      <span class="play-label">Play word</span>
+    </button>
+  </div>
+
   <header>
     <div class="brand">
       <h1>MORSEL</h1>
       <p class="subtitle">·–· daily transmission –·–·</p>
     </div>
     <div class="actions">
+      <span class="streak-pill" title="Daily streak"><span id="streak-display">0</span></span>
       <button id="btn-help" class="icon-btn" aria-label="How to play" title="How to play">?</button>
       <button id="btn-chart" class="icon-btn" aria-label="Morse chart" title="Morse chart">⋯</button>
       <button id="btn-stats" class="icon-btn" aria-label="Stats" title="Stats">★</button>
@@ -23,18 +31,10 @@
   </header>
 
   <main>
-    <div class="top-bar">
-      <button id="btn-play" class="play-button" type="button" aria-label="Play last guess in Morse">
-        <span class="play-icon" aria-hidden="true">▶</span>
-        <span class="play-label">Play last guess</span>
-      </button>
-      <span class="streak-pill" title="Daily streak"><span id="streak-display">0</span></span>
-    </div>
-
     <div id="board"></div>
     <div id="message" aria-live="polite"></div>
     <div id="post-game" hidden>
-      <button id="btn-play-word" class="btn-primary" type="button">▶ Hear the word</button>
+      <button id="btn-play-last" class="btn-primary" type="button">▶ Play last guess</button>
     </div>
 
     <div id="keyboard"></div>

@@ -90,16 +90,16 @@ header {
   color: var(--paper);
   outline: none;
 }
-/* --- Top bar (play button + streak) --- */
-.top-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
+/* --- Top play bar (always at the very top of the page) --- */
+.play-bar {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 460px;
   margin-bottom: 14px;
 }
 .play-button {
-  flex: 1;
+  width: 100%;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -107,10 +107,10 @@ header {
   background: var(--ink);
   color: var(--paper);
   border: none;
-  padding: 12px 16px;
+  padding: 14px 16px;
   font-family: 'Special Elite', monospace;
-  font-size: 0.95rem;
-  letter-spacing: 0.08em;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
   cursor: pointer;
   border-radius: 3px;
   transition: opacity 0.15s ease, transform 0.05s ease;
@@ -119,27 +119,28 @@ header {
 .play-button:hover { opacity: 0.92; }
 .play-button:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink); }
 .play-button:disabled {
-  opacity: 0.4;
+  opacity: 0.35;
   cursor: not-allowed;
   box-shadow: none;
 }
-.play-button .play-icon { font-size: 1rem; }
+.play-button .play-icon { font-size: 1.05rem; }
 .play-button .play-label {
   text-transform: uppercase;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
 }
 .streak-pill {
   display: inline-flex;
   align-items: center;
   gap: 5px;
   border: 1.5px solid var(--ink);
-  padding: 6px 10px;
+  padding: 4px 10px;
   border-radius: 999px;
   font-weight: 700;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-family: 'Special Elite', monospace;
+  height: 32px;
 }
-.streak-pill::before { content: "·–·"; letter-spacing: 0.18em; opacity: 0.7; font-size: 0.7rem; }
+.streak-pill::before { content: "·–·"; letter-spacing: 0.18em; opacity: 0.7; font-size: 0.65rem; }
 
 /* --- Board --- */
 #board {
@@ -174,13 +175,11 @@ header {
 .tile.flip { animation: flip 0.5s ease forwards; }
 @keyframes pop { 0% { transform: scale(1); } 50% { transform: scale(1.08); } 100% { transform: scale(1); } }
 @keyframes flip { 0% { transform: rotateX(0); } 50% { transform: rotateX(-90deg); } 100% { transform: rotateX(0); } }
-.tile .letter { font-size: clamp(1.4rem, 6vw, 1.85rem); font-weight: 700; letter-spacing: 0.02em; line-height: 1; }
-.tile .morse { font-size: clamp(0.6rem, 2.4vw, 0.78rem); letter-spacing: 0.18em; margin-top: 4px; opacity: 0.7; line-height: 1; }
+.tile .letter { font-size: clamp(1.6rem, 7vw, 2rem); font-weight: 700; letter-spacing: 0.02em; line-height: 1; }
 .tile.correct, .tile.present, .tile.absent { color: var(--paper); border-color: transparent; }
 .tile.correct { background: var(--correct); }
 .tile.present { background: var(--present); }
 .tile.absent  { background: var(--absent);  }
-.tile.correct .morse, .tile.present .morse, .tile.absent .morse { opacity: 0.85; }
 
 /* --- Message --- */
 #message {
