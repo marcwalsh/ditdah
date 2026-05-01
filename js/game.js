@@ -202,8 +202,6 @@ async function revealRow(rowEl, guess, result) {
     setTimeout(() => {
       tile.classList.add('filled');
       tile.classList.add(cls);
-      const morseEl = tile.querySelector('.morse');
-      if (morseEl) morseEl.textContent = code;
       const letterEl = tile.querySelector('.letter');
       if (letterEl) letterEl.textContent = letter;
     }, 250);
@@ -225,9 +223,9 @@ export function render() {
   document.dispatchEvent(new CustomEvent('morsel:state'));
 }
 
-export function canPlayLastGuess() {
+export function canPlayAnswer() {
   if (!state) return false;
-  return state.guesses.length > 0 || state.current.length > 0;
+  return state.status === 'won' || state.status === 'lost';
 }
 
 function renderBoard() {
@@ -251,8 +249,7 @@ function renderBoard() {
       if (letter) {
         tile.classList.add('filled');
         if (cls) tile.classList.add(cls);
-        tile.innerHTML = `<span class="letter">${letter}</span><span class="morse">${MORSE[letter]}</span>`;
-        tile.addEventListener('click', () => { ensureAudio(); playMorse(MORSE[letter]); });
+        tile.innerHTML = `<span class="letter">${letter}</span>`;
       }
       row.appendChild(tile);
     }
@@ -270,7 +267,7 @@ function renderActiveRow() {
     tile.innerHTML = '';
     if (letter) {
       tile.classList.add('filled');
-      tile.innerHTML = `<span class="letter">${letter}</span><span class="morse">${MORSE[letter]}</span>`;
+      tile.innerHTML = `<span class="letter">${letter}</span>`;
     }
   }
 }
